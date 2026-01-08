@@ -1,11 +1,10 @@
 <?php 
-require 'auth_fonctions.php';
 
 if (is_logged_in()) {
     redirect('index.php');
 }
 
-$error = '';
+$errors = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connexion-btn'])):
     $identifiant = $_POST['identifiant'] ?? '';
@@ -16,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connexion-btn'])):
     if ($resultat['success']):
         redirect('home.php');
     else:
-        $error = $resultat['message'];
+        $errors = $resultat['message'];
     endif;
 endif;
 ?>
@@ -31,7 +30,7 @@ endif;
 <body>
     <main>
     <h1>Connexion</h1>
-    <?php if ($error): ?>
+    <?php if ($errors): ?>
         <div class="alert">
             <?=  $errors ?>
         </div>
