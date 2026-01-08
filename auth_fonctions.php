@@ -41,6 +41,9 @@ function login_user($pdo, $identifiant, $password)
     endif;
 
     $_SESSION['logged_in'] = true;
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['email'] = $user['email'];    
 
     return [
         'success' => true,

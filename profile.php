@@ -1,11 +1,7 @@
 <?php 
-if (is_logged_in()) {
-    redirect('?page=home');
-}
-
 $errors = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['inscription-btn'])):
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-btn'])):
     $username = nettoyer($_POST['username']) ?? '';
     $email = nettoyer($_POST['email']) ?? '';
     $password = trim($_POST['password']) ?? '';
@@ -30,12 +26,12 @@ endif;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
-    <h1>Inscription</h1>
+    <h1>Profile utilisateur</h1>
     <?php if ($errors): ?>
         <div class="alert">
             <?=  $errors ?>
@@ -44,11 +40,11 @@ endif;
     <form method="POST">
         <div>
             <label for="username">Nom d'utilisateur : </label>
-            <input type="text" name="username" id="username" required>
+            <input type="text" name="username" id="username" value="<?= $_SESSION['username'] ?>" required>
         </div>
         <div>
             <label for="email">Email : </label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email" value="<?= $_SESSION['email'] ?>" required>
         </div>        
         <div>
             <label for="password">Mode de passe : </label>
@@ -59,7 +55,7 @@ endif;
             <label for="password_confirm">Confirmez le mode de passe : </label>
             <input type="password" name="password_confirm" id="password_confirm " required>
         </div>        
-        <input type="submit" name="inscription-btn" value="S'inscrire">
+        <input type="submit" name="update-btn" value="Mettre à jour">
     </form>
     </main>
 </body>

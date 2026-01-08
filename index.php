@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'config.php';
-include 'fonctions.php';
+require 'fonctions.php';
 require 'auth_fonctions.php';
 
 
