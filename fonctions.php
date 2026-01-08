@@ -18,8 +18,8 @@ function dd($data)
 
 function redirect($url)
 {
-    require $url;
-    die();
+    header('Location: ' . $url);
+    exit();
 }
 
 function nettoyer($dataParam) {

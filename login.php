@@ -1,7 +1,7 @@
 <?php 
 
 if (is_logged_in()) {
-    redirect('index.php');
+    redirect('?page=home');
 }
 
 $errors = '';
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connexion-btn'])):
     $resultat = login_user($pdo, $identifiant, $password);
 
     if ($resultat['success']):
-        redirect('home.php');
+        redirect('?page=home');
     else:
         $errors = $resultat['message'];
     endif;
@@ -46,7 +46,7 @@ endif;
         </div>
         <input type="submit" name="connexion-btn" value="Se connecter">
     </form>
-    <p>Pas encore inscrit ? <a href="index.php?page=register">S'inscrire</a></p>
+    <p>Pas encore inscrit ? <a href="?page=register">S'inscrire</a></p>
     </main>
 </body>
 </html>

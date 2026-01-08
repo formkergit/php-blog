@@ -5,7 +5,7 @@ if (is_logged_in()) {
 
 $errors = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connexion-btn'])):
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['inscription-btn'])):
     $username = nettoyer($_POST['username']) ?? '';
     $email = nettoyer($_POST['email']) ?? '';
     $password = trim($_POST['password']) ?? '';
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connexion-btn'])):
         $resultat = register_user($pdo,$username,$email,$password);
            
         if ($resultat['success']):
-            redirect('home.php');
+            redirect('index.php?page=login');
         else:
             $errors = $resultat['message'];
         endif;
@@ -30,7 +30,7 @@ endif;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Inscription</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
