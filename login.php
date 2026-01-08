@@ -46,7 +46,7 @@ endif;
         </div>
         <input type="submit" name="connexion-btn" value="Se connecter">
     </form>
-    <p>Pas encore inscrit ? <a href="inex.php?page=register">S'inscrire</a></p>
+    <p>Pas encore inscrit ? <a href="index.php?page=register">S'inscrire</a></p>
     </main>
 </body>
 </html>

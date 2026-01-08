@@ -1,6 +1,4 @@
 <?php 
-require 'auth_fonctions.php';
-
 if (is_logged_in()) {
     redirect('index.php');
 }
@@ -8,16 +6,24 @@ if (is_logged_in()) {
 $errors = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connexion-btn'])):
-    $identifiant = $_POST['identifiant'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $username = nettoyer($_POST['username']) ?? '';
+    $email = nettoyer($_POST['email']) ?? '';
+    $password = trim($_POST['password']) ?? '';
+    $password_confirm = trim($_POST['password_confirm']) ?? '';
 
-    
-    if ($resultat['success']):
-        redirect('home.php');
+    if($password !== $password_confirm):
+        $errors = 'Les mots de passe ne correspondent pas';
     else:
-        $errors = $resultat['message'];
+        $resultat = register_user($pdo,$username,$email,$password);
+           
+        if ($resultat['success']):
+            redirect('home.php');
+        else:
+            $errors = $resultat['message'];
+        endif;
     endif;
 endif;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +35,7 @@ endif;
 </head>
 <body>
     <main>
-    <h1>Connexion</h1>
+    <h1>Inscription</h1>
     <?php if ($errors): ?>
         <div class="alert">
             <?=  $errors ?>
@@ -42,19 +48,19 @@ endif;
         </div>
         <div>
             <label for="email">Email : </label>
-            <input type="text" name="email" id="email" required>
+            <input type="email" name="email" id="email" required>
         </div>        
         <div>
             <label for="password">Mode de passe : </label>
             <input type="password" name="password" id="password" required>
+            <small>Le mot de passe doit contenir au mois 6 caractéres</small>
         </div>
         <div>
             <label for="password_confirm">Confirmez le mode de passe : </label>
             <input type="password" name="password_confirm" id="password_confirm " required>
         </div>        
-        <input type="submit" name="connexion-btn" value="Se connecter">
+        <input type="submit" name="inscription-btn" value="S'inscrire">
     </form>
-    <p>Pas encore inscrit ? <a href="inex.php?page=register">S'inscrire</a></p>
     </main>
 </body>
 </html>
