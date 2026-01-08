@@ -1,0 +1,4 @@
+<?php include 'header.php' ?>
+    <h1>404 !!</h1>
+    <p>LOST ?</p>
+<?php include 'footer.php' ?>
