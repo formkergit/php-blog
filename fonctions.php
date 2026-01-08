@@ -16,3 +16,8 @@ function dd($data)
     die();
 }
 
+function redirect($url)
+{
+    require $url;
+    die();
+}
